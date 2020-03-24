@@ -1,4 +1,4 @@
-#' Calculate Infectiousness
+#' Predict Cases
 #'
 #' @param cases A dataframe containing `date` and `cases` variables
 #' @param forecast_date A character string date (format "yyyy-mm-dd") indicating
@@ -9,7 +9,7 @@
 #' to `rpois` if not supplied
 #' @inheritParams forecast_rt
 #' @inheritParams draw_from_si_prob
-#' @return The infectiousness at the current time
+#' @return Predicted cases at the current time
 #' @export
 #' @importFrom lubridate days
 #' @importFrom dplyr filter mutate select

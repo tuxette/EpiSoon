@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict_cases.R
 \name{predict_cases}
 \alias{predict_cases}
-\title{Calculate Infectiousness}
+\title{Predict Cases}
 \usage{
 predict_cases(
   cases = NULL,
@@ -33,10 +33,10 @@ arguments with the first specfying the number of samples and the second the mean
 to \code{rpois} if not supplied}
 }
 \value{
-The infectiousness at the current time
+Predicted cases at the current time
 }
 \description{
-Calculate Infectiousness
+Predict Cases
 }
 \examples{
 
