@@ -1,11 +1,14 @@
 #' Compare timeseries and forecast models
 #'
 #'
-#' @param observations A dataframe of observations including a `timeseries` variable to denote
-#' each timeseris and a  `rt` vector (to forecast) and a `date` vector (to denote time). Optionally this dataframe can
-#' contain samples for each timeseries in which case this should be denoted using a `sample` variable.
+#' @param observations A dataframe of observations including a `timeseries`
+#' variable to denote each timeseris and a `rt` vector (to forecast) and
+#' a `date` vector (to denote time). Optionally this dataframe can
+#' contain samples for each timeseries in which case this should be denoted
+#' using a `sample` variable.
 #' @inheritParams compare_models
-#' @return A list of dataframes as produced by `evaluate model` but with an additional model column.
+#' @return A list of dataframes as produced by `evaluate model`
+#' but with an additional model column.
 #' @export
 #' @importFrom purrr transpose
 #' @importFrom dplyr bind_rows group_split
@@ -52,14 +55,14 @@ compare_timeseries <- function(observations = NULL,
 
 
   evaluations <- observations %>%
-    dplyr::group_split(timeseries) %>%
-    setNames(unique(observations$timeseries)) %>%
+    dplyr::group_split(region) %>%
+    setNames(unique(observations$region)) %>%
     furrr::future_map(~ compare_models(observations = ., models = models,
                                        horizon = horizon , samples = samples,
                                        bound_rt = bound_rt),
                        .progress = TRUE) %>%
     purrr::transpose() %>%
-    purrr::map(~ dplyr::bind_rows(., .id = "timeseries"))
+    purrr::map(~ dplyr::bind_rows(., .id = "region"))
 
 
   return(evaluations)
