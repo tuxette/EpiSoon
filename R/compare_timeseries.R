@@ -77,11 +77,13 @@ compare_timeseries <- function(obs_rts = NULL,
   }
 
   obs_rts <- obs_rts %>%
+    dplyr::mutate(date = as.Date(date)) %>%
     dplyr::group_split(timeseries)
 
   timeseries <- unique(obs_cases$timeseries)
 
   obs_cases <- obs_cases %>%
+    dplyr::mutate(date = as.Date(date)) %>%
     dplyr::group_split(timeseries)
 
   evaluations <-
