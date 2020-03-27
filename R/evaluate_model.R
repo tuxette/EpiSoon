@@ -156,6 +156,7 @@ evaluate_model <- function(obs_rts = NULL,
     purrr::map2(obs_cases,
                 ~ dplyr::filter(.x, date <= max(.y$date)))
 
+
   ## Score for each forecast
   score_cases <-
     purrr::map2_dfr(case_predictions, obs_cases,

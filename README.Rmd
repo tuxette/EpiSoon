@@ -87,7 +87,7 @@ summarise_scores(scores)
 * Score the case forecast
 
 ```{r}
-scores_cases <- score_case_forecast(samples_cases, obs_cases)
+scores_cases <- score_forecast(samples_cases, obs_cases)
 
 summarise_scores(scores_cases)
 ```
