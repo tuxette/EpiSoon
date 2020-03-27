@@ -164,7 +164,7 @@ evaluate_model <- function(obs_rts = NULL,
                       dplyr::group_split(sample, forecast_date) %>%
                         setNames(unique(sample$forecast_date)) %>%
                         purrr::map_dfr(~ dplyr::select(., -forecast_date) %>%
-                                         score_case_forecast(obs), .id = "forecast_date")
+                                         score_forecast(obs), .id = "forecast_date")
                     }, .id = "sample")
 
 
