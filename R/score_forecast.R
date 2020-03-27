@@ -35,12 +35,27 @@ score_forecast <- function(fit_samples, observations) {
       date <= max(fit_samples$date)
     )
 
-  obs <- observations$rt
+  if ("cases" %in% colnames(observations)) {
+    case_score <- TRUE
+    observations <- observations$cases
+  } else {
+    case_score <- FALSE
+    obs <- observations$rt
+  }
 
-  samples_matrix <- fit_samples %>%
-    tidyr::spread(key = "sample", value = "rt") %>%
-    dplyr::select(-horizon, -date) %>%
-    as.matrix
+
+  if (cases) {
+    samples_matrix <- fit_samples %>%
+      tidyr::spread(key = "sample", value = "rt") %>%
+      dplyr::select(-horizon, -date) %>%
+      as.matrix
+  } else {
+    samples_matrix <- fit_samples %>%
+      tidyr::spread(key = "sample", value = "cases") %>%
+      dplyr::select(-horizon, -date) %>%
+      as.matrix
+
+  }
 
   scores <- tibble::tibble(
     date = observations$date,
