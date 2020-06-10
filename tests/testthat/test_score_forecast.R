@@ -9,13 +9,13 @@ samples <- forecast_rt(EpiSoon::example_obs_rts[1:10, ],
                          }, ...)
                        },
                        horizon = 7, samples = 10)
-
-## Score the model fit (with observations during the time horizon of the forecast)
 obs_test <- EpiSoon::example_obs_rts
-run_test <- score_forecast(samples,
-                           observations = obs_test)
 
 test_that("Output has proper length, names, class", {
+  ## Score the model fit (with observations during the time horizon of the forecast)
+  run_test <- score_forecast(samples,
+                             observations = obs_test)
+
   expect_s3_class(run_test, c("tbl_df", "tbl", "data.frame"))
   expect_named(run_test)
   expect_equal(nrow(run_test), length(intersect(samples$date, obs_test$date)))
@@ -23,3 +23,8 @@ test_that("Output has proper length, names, class", {
                            "sharpness", "calibration", "median", "iqr", "ci"))
 })
 
+test_that("Evaluation scores are properly selected with argument 'scores'", {
+  run_rtest <- score_forecast(samples, observations = obs_test,
+                              scores = c("median", "iqr"))
+  expect_named(run_rtest, c("date", "horizon", "median", "iqr"))
+})

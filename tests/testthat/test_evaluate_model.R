@@ -32,7 +32,7 @@ test_that("Inputs with unequal lengths return error", {
 
 context("Test of the function 'evaluate_model'.... testing outputs")
 
-test_that("Outputs have proper lenghts and names", {
+test_that("Outputs have proper lengths and names", {
   out <- evaluate_model(sampled_obs,
                         sampled_cases,
                         model = a_model,
@@ -42,6 +42,14 @@ test_that("Outputs have proper lenghts and names", {
   expect_length(out, 4)
 
   expect_named(out, c("forecast_rts", "rt_scores", "forecast_cases", "case_scores"))
+
+  expect_equal(max(out$forecast_rts$horizon), 7)
+
+  # FIX IT! to be improved with expected number of rows
+  expect_gt(nrow(out$forecast_rts), 0)
+  expect_gt(nrow(out$forecast_cases), 0)
+  expect_gt(nrow(out$rt_scores), 0)
+  expect_gt(nrow(out$case_scores), 0)
 
   # raw outputs added
   out <- evaluate_model(sampled_obs,
