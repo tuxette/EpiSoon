@@ -54,7 +54,7 @@ to \code{rpois} if not supplied}
 \item{return_raw}{Logical, should raw cases and rt forecasts be returned. Defaults to \code{FALSE}.}
 }
 \value{
-A list of dataframes as produced by \verb{evaluate model} but with an additional model column.
+A list of dataframes as produced by \code{evaluate_model} but with an additional model column.
 }
 \description{
 Compare forecasting models

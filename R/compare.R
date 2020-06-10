@@ -201,7 +201,7 @@ evaluate_model <- function(obs_rts = NULL,
 #' Example: `function(...) {EpiSoon::bsts_model(model = function(ss, y){bsts::AddAr(ss, y = y, lags = 3)}, ...)}`.
 #'
 #' @inheritParams evaluate_model
-#' @return A list of dataframes as produced by `evaluate model` but with an additional model column.
+#' @return A list of dataframes as produced by `evaluate_model` but with an additional model column.
 #' @export
 #' @importFrom purrr transpose safely
 #' @importFrom furrr future_map
